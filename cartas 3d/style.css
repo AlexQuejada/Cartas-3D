@@ -1,0 +1,115 @@
+:root{
+    --carta-height: 300px;
+    --carta-width: calc(var(--carta-height)/1.5);
+}
+
+body{
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #191c29;
+    overflow: hidden;
+}
+
+.carta{
+    width: var(--carta-width);
+    height: var(--carta-height);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 2500px;
+    margin: 0 20px;
+    border-radius: 15px;
+}
+
+.visual{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+.cara{
+    transition: all 0.5s;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.cara::before,
+.cara::after{
+    content: '';
+    opacity: 0;
+    width: 100%;
+    height: 80px;
+    transition: all 0.5s;
+    position: absolute;
+    left: 0;
+}
+
+.cara::before{
+    top: 0;
+    height: 100%;
+    background-image: linear-gradient(
+        to top,
+        rgba(12,13,19,0.5),
+        rgba(12,13,19,1)
+    );
+}
+
+.cara::after{
+    bottom: 0;
+    opacity: 1;
+    background-image: linear-gradient(
+        to bottom,
+        rgba(12,13,19,0),
+        rgba(12,13,19,1)
+    );
+}
+
+.titulo{
+    width: 100%;
+    transition: transform 0.5s;
+    position: absolute;
+    z-index: 4;
+    bottom: 0;
+}
+
+.personaje{
+    width: 100%;
+    opacity: 0;
+    position: absolute;
+    z-index: 2;
+    transition: all 0.5s;
+}
+
+.carta:hover .cara{
+    transform: perspective(900px) translateY(-5%) rotateX(25deg) translateZ(0);
+    box-shadow: 0 35px 32px -8px rgba(0,0,0,0.75);
+}
+
+.carta:hover .titulo{
+    transform: translate3d(0%, -50%, 100px);
+}
+
+.carta:hover .cara::after,
+.carta:hover .cara::before{
+    opacity: 1;
+}
+
+.carta:hover .cara::after{
+    height: 120px;
+}
+
+.carta:hover .personaje{
+    opacity: 1;
+    transform: translate3d(0%, -30%, 100px);
+}
